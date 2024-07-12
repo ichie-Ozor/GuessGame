@@ -65,7 +65,7 @@ function nextGuessHandler(direction){
             <Title>Opponent's Guess</Title>
             <NumberContainer>{currentGuess}</NumberContainer>
             <Cards>
-                <InstructionText>Higer or Lower?</InstructionText>
+                <InstructionText style={styles.instructionText}>Higer or Lower?</InstructionText>
                 <View style={styles.buttonsContainer}>
                     <View style={styles.buttonContainer}>
                        <PrimaryButton onPress={nextGuessHandler.bind(this, 'lower')}>-</PrimaryButton>
@@ -86,6 +86,9 @@ const styles = StyleSheet.create({
     screen: {
         flex: 1,
         padding: 40
+    },
+    instructionText: {
+        marginBottom: 12
     },
     buttonsContainer: {
         flexDirection: 'row'
