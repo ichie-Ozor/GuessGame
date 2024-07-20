@@ -5,13 +5,24 @@ import { LinearGradient }  from 'expo-linear-gradient'
 import GameScreen from './screens/GameScreen';
 import Colors from './util/colors.js'
 import GameOverScreen from './screens/GameOverScreen.js';
+import {useFonts} from 'expo-font'
+import AppLoading from 'expo-app-loading';
 
 
 export default function App() {
 
   const [userNumber, setUserNumber] = useState();
   const [gameIsOver, setGameIsOver] = useState(true)
+  const [guessRound, setGuessRounds] = useState(0)
 
+  const [fontsLoaded] = useFonts({
+    'open-sans' : require('./assets/fonts/OpenSans-Regular.ttf'),
+    'open-sans-bold' : require('./assets/fonts/OpenSans-Bold.ttf')
+  })
+
+  if(!fontsLoaded){
+    return <AppLoading />;
+  }
   function pickedNumberHandler(pickedNumber){
     console.log("hello, picked number", pickedNumber)
     setUserNumber(pickedNumber)
@@ -19,8 +30,14 @@ export default function App() {
   }
 
   
-  function gameOverHAndler(){
+  function gameOverHAndler(numberOfRounds){
     setGameIsOver(true)
+    setGuessRounds(numberOfRounds)
+  }
+
+  function startNewGameHandler(){
+    setUserNumber(null)
+    setGuessRounds(0);
   }
 
   let screen = <StartGameScreen onPickNumber={pickedNumberHandler}/>
@@ -30,7 +47,7 @@ export default function App() {
   }
 
   if(gameIsOver && userNumber) {
-    screen = <GameOverScreen />
+    screen = <GameOverScreen userNumber={userNumber} roundsNumber={guessRound} onStartNewGame={startNewGameHandler}/>
   }
 
 

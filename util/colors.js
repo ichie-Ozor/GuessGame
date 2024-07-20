@@ -4,7 +4,10 @@ const Colors = {
     primary600: '#72063c',
     primary700: '#cc8800',
     assent: '#4e0329',
-    yellow100: '#ddb52f'
+    yellow100: '#ddb52f',
+    yellow200: '#e5f73e',
+    fine: '#112A46',
+
 }
 
 export default Colors
